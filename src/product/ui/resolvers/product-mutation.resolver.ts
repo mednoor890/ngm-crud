@@ -1,21 +1,11 @@
-import { Resolver, Args, Mutation, Query, Int } from '@nestjs/graphql';
-import { ProductType } from './dto/create-product.dto';
+import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { ProductType } from '../../../libs/dto/create-product.dto';
 import { ProductService } from 'src/product/domain/product.service';
-import { createProductInput } from './inputs/product.input';
+import { createProductInput } from '../../../libs/inputs/product.input';
 
 @Resolver()
 export class ProductResolver {
-  constructor(private productService: ProductService) {}
-  @Query(() => [ProductType])
-  async getAllProducts(): Promise<ProductType[]> {
-    return await this.productService.findAll();
-  }
-  @Query(() => ProductType)
-  async getProduct(
-    @Args({ name: 'id', type: () => Int }) id: number,
-  ): Promise<ProductType> {
-    return await this.productService.findById(id);
-  }
+  constructor(private productService: ProductService) {} 
   @Mutation((returns) => ProductType)
   async createProduct(
     @Args('input') input: createProductInput,

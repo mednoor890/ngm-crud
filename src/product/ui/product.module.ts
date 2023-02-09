@@ -7,6 +7,7 @@ import { ProductSchema } from '../infrastructure/schemas/product.schema';
 import { join } from 'path';
 import { ProductResolver } from './resolvers/product-mutation.resolver';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ProductResolverQuery } from './resolvers/product-query.resolver';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Product', schema: ProductSchema }]),
@@ -16,6 +17,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       sortSchema: true,
     }),
   ],
-  providers: [ProductService, ProductRepository, ProductResolver],
+  providers: [
+    ProductService,
+    ProductRepository,
+    ProductResolver,
+    ProductResolverQuery,
+  ],
 })
 export class ProductModule {}
