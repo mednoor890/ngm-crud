@@ -15,14 +15,14 @@ export class ProductResolver {
   }
   @Mutation(() => ProductType)
   async updateProduct(
-    @Args('id') id: number,
+    @Args('id') id: string,
     @Args('input') input: createProductInput,
   ): Promise<ProductType> {
     const updatedProduct = await this.productService.update(id, input);
     return updatedProduct;
   }
   @Mutation(() => ProductType)
-  async deleteProduct(@Args('id') id: number): Promise<ProductType> {
+  async deleteProduct(@Args('id') id: string): Promise<ProductType> {
     const deletedProduct = await this.productService.delete(id);
     return deletedProduct;
   }

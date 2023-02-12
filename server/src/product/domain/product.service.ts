@@ -15,11 +15,11 @@ export class ProductService {
     return await this.productRepository.create(product);
   }
 
-  async update(id: number, product: Product): Promise<Product> {
+  async update(id: string, product: Product): Promise<Product> {
     return await this.productRepository.update(id, product);
   }
 
-  async delete(id: number): Promise<Product> {
+  async delete(id: string): Promise<Product> {
     return await this.productRepository.delete(id);
   }
 }

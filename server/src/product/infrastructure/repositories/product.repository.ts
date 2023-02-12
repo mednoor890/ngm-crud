@@ -22,10 +22,10 @@ export class ProductRepository {
     const createdProduct = new this.productModel(product);
     return await createdProduct.save();
   }
-  async update(id: number, product: Product): Promise<Product> {
+  async update(id: string, product: Product): Promise<Product> {
     return await this.productModel.findOneAndUpdate({ id }, product).exec();
   }
-  async delete(id: number): Promise<Product> {
+  async delete(id: string): Promise<Product> {
     return await this.productModel.findOneAndRemove({ id });
   }
 }

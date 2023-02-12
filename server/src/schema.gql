@@ -4,8 +4,8 @@
 
 type Mutation {
   createProduct(input: createProductInput!): ProductType!
-  deleteProduct(id: Float!): ProductType!
-  updateProduct(id: Float!, input: createProductInput!): ProductType!
+  deleteProduct(id: String!): ProductType!
+  updateProduct(id: String!, input: createProductInput!): ProductType!
 }
 
 type ProductType {
