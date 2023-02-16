@@ -5,8 +5,8 @@ import { createProductInput } from '../../../libs/inputs/product.input';
 
 @Resolver()
 export class ProductResolver {
-  constructor(private productService: ProductService) {} 
-  @Mutation((returns) => ProductType)
+  constructor(private productService: ProductService) {}
+  @Mutation(() => ProductType)
   async createProduct(
     @Args('input') input: createProductInput,
   ): Promise<ProductType> {

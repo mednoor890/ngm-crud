@@ -1,14 +1,12 @@
-
-
 import React, { useEffect, useState } from "react"
 import {  useMutation ,useQuery} from '@apollo/client';
 import FileBase from 'react-file-base64'
 //import { FileBaseResult } from 'react-file-base64'
-import Input from "./Input"
+import Input from "../Form/Input"
 import Button from "../Cards/Button";
 import { ADD_PRODUCT, UPDATE_PRODUCT } from "../../graphql/MutationProducts";
 import { GET_PRODUCTS } from "../../graphql/getProduct";
-import { CloseButton, ModalForm, ModalWindow, Overlay } from "./styles/Form";
+import { CloseButton, ModalForm, ModalWindow, Overlay } from "../Form/styles/Form";
 
 interface FormData 
 {   id:string,
@@ -18,7 +16,7 @@ interface FormData
     image: string
 }
 interface Props {
-    productData: {
+    product: {
         id: string,
         name: string,
         description: string,
@@ -30,19 +28,20 @@ interface Props {
     mode: "Add" | "Update";
    isUpdating: boolean;
 }
-const Form:React.FC<Props>=({closeModal,mode,productData}) => {
+const FormU:React.FC<Props>=({product,closeModal,mode}) => {
+    console.log(product);
+
 const  [FormData, setFormData] = useState<FormData>(
-    {    id: "",
-        name:"" ,
-        price:"",
-        description:"" ,
-        image:"" 
+    {    id: product.id,
+        name: product.name,
+        price:product.price,
+        description:product.description ,
+        image:product.image 
     }
 );
-const [AddProduct, { data }] = useMutation(ADD_PRODUCT);
-const { refetch } = useQuery(GET_PRODUCTS);
+
+
 const [updateProduct, { data: updateData }] = useMutation(UPDATE_PRODUCT);
-const [showAddButton, setShowAddButton] = useState(mode==="Add");
 
 
 const handleInputChange =(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -57,7 +56,7 @@ const handleUpdate=(e:React.FormEvent)=>{
     .then(({ data })=>
     {
     console.log('Product updated:', data.updateProduct)
-    refetch()
+    //refetch()
     //setShowForm(false)
     })
     .catch(error => {
@@ -66,18 +65,8 @@ const handleUpdate=(e:React.FormEvent)=>{
    
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        AddProduct({ variables: { ...FormData } })
-          .then(({ data }) => {
-            console.log("Product added:", data.addProduct);
-            refetch();
-            closeModal();
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
+
+      
       
 return (
     <>
@@ -85,23 +74,27 @@ return (
         <ModalWindow>
         <CloseButton onClick={closeModal}>X</CloseButton>
 
-    <ModalForm onSubmit={handleSubmit}>
+    <ModalForm onSubmit={handleUpdate}>
     
 
         <Input type="number" label="id" name="id" onChange={handleInputChange} value={FormData.id} />
         <Input type="text" label="name" name="name" onChange={handleInputChange} value={FormData.name}/>
         <Input type="number"  label="price" name="price" onChange={handleInputChange} value={FormData.price}/>
         <Input type="text"  label="description" name="description" onChange={handleInputChange} value={FormData.description}/>
-        <FileBase value={FormData.image} placeholder="enter an image for your product" type="file" multiple={false} onDone={(result: FileBaseResult) =>
+        <FileBase 
+             value={FormData.image}
+             placeholder="enter an image for your product"
+             type="image"
+             multiple={false}
+              onDone={(result: FileBaseResult) =>
             setFormData({ ...FormData, image: result.base64 })
           }
   /> 
- <Button mode="Add" onClick={handleSubmit}/> 
-  
+        <Button  mode="Update" onClick={handleUpdate}/>    
     </ModalForm>
     </ModalWindow>
     </Overlay>
     </>
 )
 }
-export default  Form
+export default  FormU

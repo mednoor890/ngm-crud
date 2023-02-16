@@ -22,4 +22,3 @@ export class Product {
   image: string;
 }
 export const ProductSchema = SchemaFactory.createForClass(Product);
-

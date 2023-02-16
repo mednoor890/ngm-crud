@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 @ObjectType()
 export class ProductType {
-  @Field(() => ID)
+  @Field()
   id: string;
   @Field()
   readonly name: string;

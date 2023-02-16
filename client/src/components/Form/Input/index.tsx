@@ -1,4 +1,5 @@
 export {}
+import Inputt, { Label } from './Input'
 interface InputProps {
 label:string;
 name:string;
@@ -10,8 +11,8 @@ const Input:React.FC <InputProps> =({ type,label, name, value, onChange})=>
 {
 return(
 <div>
-    <label>{label}</label>
-    <input type={type} id={name} name={name} value={value} onChange={onChange}/>
+    <Label>{label}:</Label>
+    <Inputt type={type} id={name} name={name} value={value} onChange={onChange}/>
 </div>
 )
 }

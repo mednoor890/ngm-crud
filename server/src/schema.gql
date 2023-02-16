@@ -10,7 +10,7 @@ type Mutation {
 
 type ProductType {
   description: String!
-  id: ID!
+  id: String!
   image: String
   name: String!
   price: String!
