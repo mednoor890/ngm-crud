@@ -39,7 +39,7 @@ const Cards:React.FC=()=>
     return (
         <>
          <Button  type="submit" mode= "Add" onClick={() => setHide(!hide)}/>
-         {hide &&( <Form handleSubmit={handleSubmit} product={productData} closeModal={() => setHide(false)} />)}
+         {hide &&( <Form mode='Add' handleSubmit={handleSubmit} productData={productData} closeModal={() => setHide(false)} />)}
         <Container>
         {data.getAllProducts.map((product: { id: string; name: string; description: string; price: string; image: string; })=>(
             <Card 

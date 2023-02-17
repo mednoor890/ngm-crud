@@ -42,7 +42,7 @@ const Card: React.FC<CardProps> = ({ id, name, description, price, image }) => {
            
             <Button onClick={handleDelete} mode="Delete"/>
             <Button mode="Update"   onClick={() => setShowForm(!showForm)} />
-            {showForm &&( <FormU product={{ id, name, description, price, image }} closeModal={() => setShowForm(false)} />)}
+            {showForm &&( <FormU product={{ id, name, description, price, image }} closeModal={() => setShowForm(false)} mode={'Add'} isUpdating={false}  />)}
             
         </CardContainer>
     )

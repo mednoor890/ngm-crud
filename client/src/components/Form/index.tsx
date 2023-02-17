@@ -26,9 +26,9 @@ interface Props {
         image: string,
       },
     closeModal:()=>void;
-    //handleSubmit:(e:React.FormEvent)=>void;
+    handleSubmit:(e:React.FormEvent)=>void;
     mode: "Add" | "Update";
-   isUpdating: boolean;
+   
 }
 const Form:React.FC<Props>=({closeModal,mode,productData}) => {
 const  [FormData, setFormData] = useState<FormData>(

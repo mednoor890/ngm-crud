@@ -4,7 +4,7 @@ import FileBase from 'react-file-base64'
 //import { FileBaseResult } from 'react-file-base64'
 import Input from "../Form/Input"
 import Button from "../Cards/Button";
-import { ADD_PRODUCT, UPDATE_PRODUCT } from "../../graphql/MutationProducts";
+import {  UPDATE_PRODUCT } from "../../graphql/MutationProducts";
 import { GET_PRODUCTS } from "../../graphql/getProduct";
 import { CloseButton, ModalForm, ModalWindow, Overlay } from "../Form/styles/Form";
 
@@ -40,6 +40,7 @@ const  [FormData, setFormData] = useState<FormData>(
     }
 );
 
+const { refetch } = useQuery(GET_PRODUCTS);
 
 const [updateProduct, { data: updateData }] = useMutation(UPDATE_PRODUCT);
 
@@ -56,8 +57,8 @@ const handleUpdate=(e:React.FormEvent)=>{
     .then(({ data })=>
     {
     console.log('Product updated:', data.updateProduct)
-    //refetch()
-    //setShowForm(false)
+    refetch()
+    closeModal()
     })
     .catch(error => {
       console.error(error);
