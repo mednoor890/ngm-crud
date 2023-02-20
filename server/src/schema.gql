@@ -19,6 +19,11 @@ type ProductType {
 type Query {
   getAllProducts: [ProductType!]!
   getProduct(id: Int!): ProductType!
+  srapeData: [ScrapeType!]!
+}
+
+type ScrapeType {
+  imageUrl: String
 }
 
 input createProductInput {

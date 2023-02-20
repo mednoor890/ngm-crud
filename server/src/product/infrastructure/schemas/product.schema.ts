@@ -4,8 +4,8 @@ export type ProductSchema = new mongoose.Schema({
 
 })*/
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-export type ProductDocument = HydratedDocument<Product>; //hydratedDocument?
+import { Document } from 'mongoose';
+export type ProductDocument = Document<Product>; //hydratedDocument?
 @Schema()
 export class Product {
   @Prop()
